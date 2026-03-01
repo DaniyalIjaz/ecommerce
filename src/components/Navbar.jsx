@@ -486,6 +486,7 @@ import { ShopContext } from '../context/ShopContext';
 import { supabase } from '../lib/supabase';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import NavbarBanner from './NavbarBanner';
+import { User } from "lucide-react";
 import {
   Heart, ShoppingBag, LayoutDashboard, Store,
   ChevronDown, Search, Menu, X,
@@ -704,7 +705,7 @@ const Navbar = () => {
               <NavToolIcon 
                 icon={Search} 
                 onClick={triggerGlobalSearch} 
-                className="flex" // Always visible on mobile/desktop
+                className="hidden md:flex" // Always visible on mobile/desktop
               />
               <NavToolIcon 
                 icon={Heart} 
@@ -763,7 +764,7 @@ const Navbar = () => {
 
                           <div className="space-y-1 p-1">
                             {role === 'admin' && <UserTermLink icon={LayoutDashboard} label="Admin Control" to="/admin/dashboard" />}
-                            {(role === 'vendor' || role === 'admin') && <UserTermLink icon={Store} label="Merchant Node" to="/vendor/dashboard" />}
+                            {(role === 'vendor' || role === 'admin') && <UserTermLink icon={Store} label="Vendor dashboard" to="/vendor/dashboard" />}
                             <UserTermLink icon={Fingerprint} label="Order History" to="/orders" />
                             <UserTermLink icon={Settings} label="Access Settings" to="/profile" />
                             
@@ -772,7 +773,7 @@ const Navbar = () => {
                               className="w-full mt-2 flex items-center gap-4 px-5 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest text-red-600 hover:bg-red-50 transition-all border border-transparent hover:border-red-100"
                             >
                               <LogOut size={14} />
-                              Terminate Session
+                             Logout
                             </button>
                           </div>
                         </div>
@@ -787,7 +788,7 @@ const Navbar = () => {
                   onClick={() => setAuthModalOpen(true)}
                   className="bg-stone-950 text-white px-8 py-3.5 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] shadow-xl border border-white/10"
                 >
-                  Sync Identity
+                  <User size={20} />
                 </motion.button>
               )}
             </div>
