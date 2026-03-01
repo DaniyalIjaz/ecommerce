@@ -1,3 +1,8 @@
+
+
+
+
+
 // import React, { useContext, useEffect, useState, useCallback, useRef } from 'react';
 // import { assets } from '../assets/frontend_assets/assets';
 // import { Link, NavLink, useNavigate } from 'react-router-dom';
@@ -5,9 +10,10 @@
 // import { supabase } from '../lib/supabase';
 // import { motion, AnimatePresence, useScroll } from 'framer-motion';
 // import NavbarBanner from './NavbarBanner';
-// import { 
-//   Heart, ShoppingBag, LayoutDashboard, Store, 
-//   ChevronDown, Search, Menu, X, 
+// import { User } from "lucide-react";
+// import {
+//   Heart, ShoppingBag, LayoutDashboard, Store,
+//   ChevronDown, Search, Menu, X,
 //   Command, Fingerprint, ArrowRight,
 //   ShieldCheck, Activity, LogOut, Settings, Hash, TrendingUp
 // } from 'lucide-react';
@@ -20,7 +26,7 @@
 //   const [isSearchOpen, setIsSearchOpen] = useState(false);
 //   const [categories, setCategories] = useState([]);
 //   const [isScrolled, setIsScrolled] = useState(false);
-  
+
 //   const searchInputRef = useRef(null);
 //   const {
 //     search,
@@ -33,7 +39,7 @@
 //     role,
 //     setAuthModalOpen,
 //   } = useContext(ShopContext);
-  
+
 //   const navigate = useNavigate();
 //   const { scrollY } = useScroll();
 
@@ -85,60 +91,64 @@
 //     navigate('/');
 //   };
 
+//   // Sync with Collection Search
+//   const triggerGlobalSearch = () => {
+//     setShowSearch(true);
+//     navigate('/collection');
+//     setIsSearchOpen(false);
+//     setVisible(false);
+//   };
+
 //   const handleSearchSubmit = (e) => {
 //     e?.preventDefault();
 //     if (search.trim()) {
-//       setShowSearch(true);
-//       setIsSearchOpen(false);
-//       navigate('/collection');
+//       triggerGlobalSearch();
 //     }
 //   };
 
 //   const navLinkClass = ({ isActive }) =>
-//     `relative text-[10px] font-black uppercase tracking-[0.3em] px-5 py-2.5 transition-all duration-300 flex items-center gap-2 ${
-//       isActive ? 'text-stone-950' : 'text-stone-400 hover:text-stone-950'
-//     }`;
+//     `relative text-[10px] font-black uppercase tracking-[0.3em] px-5 py-2.5 transition-all duration-300 flex items-center gap-2 ${isActive ? 'text-stone-950' : 'text-stone-400 hover:text-stone-950'}`;
 
 //   return (
 //     <header className="sticky top-0 z-[100] transition-all duration-500">
 //       <NavbarBanner />
-      
+
 //       <nav className={`px-4 md:px-10 transition-all duration-700 ${
 //         isScrolled 
 //         ? 'bg-white/80 backdrop-blur-2xl py-3 shadow-[0_20px_50px_rgba(0,0,0,0.1)] border-b border-black/10' 
 //         : 'bg-[#fbfbf9] py-6 border-b border-transparent'
 //       }`}>
 //         <div className="max-w-[1800px] mx-auto flex items-center justify-between gap-8">
-          
+
 //           {/* BRAND IDENTITY */}
 //           <Link to="/" className="relative group flex-shrink-0 flex items-center gap-3">
 //             <div className="relative">
-//                 <img src={assets.logo} alt="Logo" className="w-28 md:w-36 transition-all duration-500 group-hover:scale-105" />
-//                 <motion.div 
-//                     animate={{ opacity: [0.4, 1, 0.4] }} 
-//                     transition={{ repeat: Infinity, duration: 2 }}
-//                     className="absolute -right-2 -top-1 w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.8)]" 
-//                 />
+//               <img src={assets.logo} alt="Logo" className="w-28 md:w-36 transition-all duration-500 group-hover:scale-105" />
+//               <motion.div 
+//                 animate={{ opacity: [0.4, 1, 0.4] }} 
+//                 transition={{ repeat: Infinity, duration: 2 }}
+//                 className="absolute -right-2 -top-1 w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.8)]" 
+//               />
 //             </div>
 //           </Link>
 
 //           {/* CENTRAL TERMINAL NAVIGATION */}
 //           <div className="hidden lg:flex items-center bg-stone-200/30 p-1.5 rounded-full border border-black/5 shadow-inner">
 //             <NavLink to="/" className={navLinkClass}>
-//                 {({isActive}) => (
-//                     <>
-//                         {isActive && <motion.div layoutId="nav-pill" className="absolute inset-0 bg-white shadow-sm rounded-full -z-10 border border-black/5" />}
-//                         Home
-//                     </>
-//                 )}
+//               {({isActive}) => (
+//                 <>
+//                   {isActive && <motion.div layoutId="nav-pill" className="absolute inset-0 bg-white shadow-sm rounded-full -z-10 border border-black/5" />}
+//                   Home
+//                 </>
+//               )}
 //             </NavLink>
 //             <NavLink to="/collection" className={navLinkClass}>
-//                 {({isActive}) => (
-//                     <>
-//                         {isActive && <motion.div layoutId="nav-pill" className="absolute inset-0 bg-white shadow-sm rounded-full -z-10 border border-black/5" />}
-//                         Vault
-//                     </>
-//                 )}
+//               {({isActive}) => (
+//                 <>
+//                   {isActive && <motion.div layoutId="nav-pill" className="absolute inset-0 bg-white shadow-sm rounded-full -z-10 border border-black/5" />}
+//                   Products
+//                 </>
+//               )}
 //             </NavLink>
 
 //             {/* DYNAMIC CATEGORY MEGA-MENU */}
@@ -148,7 +158,7 @@
 //               onMouseLeave={() => setShowCategoryMenu(false)}
 //             >
 //               <button className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] px-5 py-2.5 text-stone-400 hover:text-stone-950 transition-all group">
-//                 Index <ChevronDown size={10} className={`${showCategoryMenu ? 'rotate-180' : ''} transition-transform duration-300`} />
+//                 Categories <ChevronDown size={10} className={`${showCategoryMenu ? 'rotate-180' : ''} transition-transform duration-300`} />
 //               </button>
               
 //               <AnimatePresence>
@@ -187,42 +197,50 @@
 //             </div>
 
 //             <NavLink to="/support" className={navLinkClass}>
-//                 {({isActive}) => (
-//                     <>
-//                         {isActive && <motion.div layoutId="nav-pill" className="absolute inset-0 bg-white shadow-sm rounded-full -z-10 border border-black/5" />}
-//                         Support
-//                     </>
-//                 )}
+//               {({isActive}) => (
+//                 <>
+//                   {isActive && <motion.div layoutId="nav-pill" className="absolute inset-0 bg-white shadow-sm rounded-full -z-10 border border-black/5" />}
+//                   Help & Support
+//                 </>
+//               )}
 //             </NavLink>
 //           </div>
 
 //           {/* ACTION CLUSTER */}
 //           <div className="flex items-center gap-5 flex-1 justify-end">
             
-//             {/* NEW PROFESSIONAL SEARCH TRIGGER */}
-//             <motion.button 
+//             {/* SEARCH TRIGGER (CMD+K) */}
+//             {/* <motion.button 
 //               whileHover={{ scale: 1.02 }}
 //               whileTap={{ scale: 0.98 }}
 //               onClick={() => setIsSearchOpen(true)}
-//               className="hidden md:flex items-center gap-4 bg-stone-100/50 border border-black/[0.06] hover:border-stone-900/20 hover:bg-stone-100 px-4 py-2.5 rounded-xl transition-all min-w-[200px]"
+//               className="hidden xl:flex items-center gap-4 bg-stone-100/50 border border-black/[0.06] hover:border-stone-900/20 hover:bg-stone-100 px-4 py-2.5 rounded-xl transition-all min-w-[200px]"
 //             >
 //               <Search size={16} className="text-stone-400" />
 //               <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest flex-1 text-left">Search Vault...</span>
 //               <div className="flex items-center gap-1 bg-white border border-black/10 px-1.5 py-0.5 rounded text-[9px] font-black text-stone-400 shadow-sm">
 //                 <Command size={10} /> K
 //               </div>
-//             </motion.button>
+//             </motion.button> */}
 
 //             {/* ICON TOOLS */}
 //             <div className="flex items-center gap-3">
+//               {/* SYNCED SEARCH ICON - Works like the Collection search icon */}
+//               <NavToolIcon 
+//                 icon={Search} 
+//                 onClick={triggerGlobalSearch} 
+//                 className="hidden md:flex" // Always visible on mobile/desktop
+//               />
 //               <NavToolIcon 
 //                 icon={Heart} 
 //                 count={getWishlistCount()} 
+//                  className="hidden md:flex" 
 //                 onClick={() => user ? navigate('/wishlist') : setAuthModalOpen(true)} 
 //               />
 //               <NavToolIcon 
 //                 icon={ShoppingBag} 
 //                 count={getCartCount()} 
+//                  className="hidden md:flex" 
 //                 onClick={() => navigate('/cart')} 
 //               />
 //             </div>
@@ -272,7 +290,7 @@
 
 //                           <div className="space-y-1 p-1">
 //                             {role === 'admin' && <UserTermLink icon={LayoutDashboard} label="Admin Control" to="/admin/dashboard" />}
-//                             {(role === 'vendor' || role === 'admin') && <UserTermLink icon={Store} label="Merchant Node" to="/vendor/dashboard" />}
+//                             {(role === 'vendor' || role === 'admin') && <UserTermLink icon={Store} label="Vendor dashboard" to="/vendor/dashboard" />}
 //                             <UserTermLink icon={Fingerprint} label="Order History" to="/orders" />
 //                             <UserTermLink icon={Settings} label="Access Settings" to="/profile" />
                             
@@ -281,7 +299,7 @@
 //                               className="w-full mt-2 flex items-center gap-4 px-5 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest text-red-600 hover:bg-red-50 transition-all border border-transparent hover:border-red-100"
 //                             >
 //                               <LogOut size={14} />
-//                               Terminate Session
+//                              Logout
 //                             </button>
 //                           </div>
 //                         </div>
@@ -296,7 +314,7 @@
 //                   onClick={() => setAuthModalOpen(true)}
 //                   className="bg-stone-950 text-white px-8 py-3.5 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] shadow-xl border border-white/10"
 //                 >
-//                   Sync Identity
+//                   <User size={20} />
 //                 </motion.button>
 //               )}
 //             </div>
@@ -311,14 +329,14 @@
 //       {/* FULL-SCREEN SEARCH OVERLAY (The "Command Palette") */}
 //       <AnimatePresence>
 //         {isSearchOpen && (
-//           <motion.div 
-//             initial={{ opacity: 0 }} 
-//             animate={{ opacity: 1 }} 
+//           <motion.div
+//             initial={{ opacity: 0 }}
+//             animate={{ opacity: 1 }}
 //             exit={{ opacity: 0 }}
 //             className="fixed inset-0 z-[300] bg-white/60 backdrop-blur-xl flex items-start justify-center pt-[10vh] px-4"
 //             onClick={() => setIsSearchOpen(false)}
 //           >
-//             <motion.div 
+//             <motion.div
 //               initial={{ y: -20, scale: 0.95 }}
 //               animate={{ y: 0, scale: 1 }}
 //               exit={{ y: -20, scale: 0.95 }}
@@ -327,7 +345,7 @@
 //             >
 //               <form onSubmit={handleSearchSubmit} className="relative flex items-center p-6 border-b border-stone-100">
 //                 <Search size={24} className="text-stone-950 ml-4" />
-//                 <input 
+//                 <input
 //                   ref={searchInputRef}
 //                   type="text"
 //                   value={search}
@@ -335,15 +353,15 @@
 //                   placeholder="WHAT ARE YOU LOOKING FOR?"
 //                   className="w-full bg-transparent px-6 py-4 text-xl font-black uppercase tracking-tighter outline-none placeholder:text-stone-300 text-stone-950"
 //                 />
-//                 <button 
-//                   type="button" 
+//                 <button
+//                   type="button"
 //                   onClick={() => setIsSearchOpen(false)}
 //                   className="p-3 hover:bg-stone-100 rounded-full transition-colors text-stone-400"
 //                 >
 //                   <X size={20} />
 //                 </button>
 //               </form>
-              
+
 //               <div className="p-8">
 //                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 //                   {/* SEARCH SUGGESTIONS */}
@@ -355,7 +373,7 @@
 //                       {['New Arrivals', 'Limited Edition', 'Tactical Gear', 'Vault Archives'].map((tag) => (
 //                         <button 
 //                           key={tag}
-//                           onClick={() => { setSearch(tag); handleSearchSubmit(); }}
+//                           onClick={() => { setSearch(tag); triggerGlobalSearch(); }}
 //                           className="w-full text-left px-4 py-3 rounded-xl hover:bg-stone-950 hover:text-white transition-all text-xs font-bold text-stone-600 flex items-center justify-between group"
 //                         >
 //                           {tag}
@@ -375,7 +393,7 @@
 //                         <Link 
 //                           key={cat.id} 
 //                           to={`/collection?category=${cat.slug}`}
-//                           onClick={() => setIsSearchOpen(false)}
+//                           onClick={() => {setIsSearchOpen(false); setShowSearch(true);}}
 //                           className="px-4 py-2 bg-stone-50 border border-black/5 rounded-lg text-[10px] font-black uppercase tracking-widest text-stone-950 hover:bg-stone-950 hover:text-white transition-all"
 //                         >
 //                           {cat.name}
@@ -402,35 +420,57 @@
 //       {/* MOBILE INTERFACE */}
 //       <AnimatePresence>
 //         {visible && (
-//           <motion.div 
+//           <motion.div
 //             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
 //             className="fixed inset-0 z-[200] bg-stone-950/40 backdrop-blur-md lg:hidden"
 //             onClick={() => setVisible(false)}
 //           >
-//             <motion.div 
+//             <motion.div
 //               initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }}
 //               transition={{ type: "spring", damping: 30, stiffness: 300 }}
 //               className="absolute right-0 h-full w-[85%] bg-[#fbfbf9] shadow-2xl p-8 flex flex-col border-l border-black/5"
 //               onClick={(e) => e.stopPropagation()}
 //             >
 //               <div className="flex justify-between items-center mb-12">
-//                  <img src={assets.logo} alt="" className="w-28" />
-//                  <button onClick={() => setVisible(false)} className="p-3 bg-white shadow-md border border-black/5 rounded-full"><X size={20}/></button>
+//                 <img src={assets.logo} alt="" className="w-28" />
+//                 <button onClick={() => setVisible(false)} className="p-3 bg-white shadow-md border border-black/5 rounded-full"><X size={20}/></button>
 //               </div>
 //               <div className="flex flex-col gap-2">
-//                  <MobileTermLink to="/" label="Home" onClick={() => setVisible(false)} />
-//                  <MobileTermLink to="/collection" label="The Vault" onClick={() => setVisible(false)} />
-//                  <MobileTermLink to="/about" label="Legacy" onClick={() => setVisible(false)} />
-//                  <MobileTermLink to="/support" label="Terminal Support" onClick={() => setVisible(false)} />
+//                 <MobileTermLink to="/" label="Home" onClick={() => setVisible(false)} />
+//                 <MobileTermLink to="/collection" label="Products" onClick={() => setVisible(false)} />
+//                 <MobileTermLink to="/about" label="Categories" onClick={() => setVisible(false)} />
+//                 <MobileTermLink to="/support" label="Help & Support" onClick={() => setVisible(false)} />
+//                 <button 
+//                   onClick={triggerGlobalSearch}
+//                   className="group flex items-center justify-between py-5 border-b border-black/[0.05] text-left"
+//                 >
+//                   <span className="text-3xl font-black italic uppercase tracking-tighter text-stone-300 group-hover:text-stone-950 transition-all">Search</span>
+//                   <Search className="text-emerald-500" />
+//                 </button>
 //               </div>
-              
+
+//               <div className='flex gap-4'>
+//                    <NavToolIcon 
+//                 icon={Heart} 
+//                 count={getWishlistCount()} 
+                
+//                 onClick={() => user ? navigate('/wishlist') : setAuthModalOpen(true)} 
+//               />
+//               <NavToolIcon 
+//                 icon={ShoppingBag} 
+//                 count={getCartCount()} 
+                
+//                 onClick={() => navigate('/cart')} 
+//               />
+//               </div>
+
 //               <div className="mt-auto p-8 bg-stone-950 rounded-[2.5rem] text-white overflow-hidden relative group">
-//                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-//                     <Activity size={80} />
-//                  </div>
-//                  <Fingerprint size={32} className="mb-4 text-emerald-500" />
-//                  <p className="text-[10px] font-black uppercase tracking-[0.3em] opacity-50">System Version</p>
-//                  <p className="text-lg font-black italic tracking-tighter">v1.0.9-STABLE</p>
+//                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+//                    <Activity size={80} />
+//                 </div>
+//                 <Fingerprint size={32} className="mb-4 text-emerald-500" />
+//                 <p className="text-[10px] font-black uppercase tracking-[0.3em] opacity-50">System Version</p>
+//                 <p className="text-lg font-black italic tracking-tighter">v1.0.9-STABLE</p>
 //               </div>
 //             </motion.div>
 //           </motion.div>
@@ -442,12 +482,12 @@
 
 // // --- SUB-COMPONENTS ---
 
-// const NavToolIcon = ({ icon: Icon, count, onClick }) => (
-//   <motion.button 
+// const NavToolIcon = ({ icon: Icon, count, onClick, className = "" }) => (
+//   <motion.button
 //     whileHover={{ y: -2, scale: 1.05 }}
 //     whileTap={{ scale: 0.95 }}
-//     onClick={onClick} 
-//     className="relative p-3.5 rounded-xl bg-white border border-black/[0.08] text-stone-400 hover:text-stone-950 hover:shadow-md transition-all group"
+//     onClick={onClick}
+//     className={`relative p-3.5 rounded-xl bg-white border border-black/[0.08] text-stone-400 hover:text-stone-950 hover:shadow-md transition-all group ${className}`}
 //   >
 //     <Icon size={18} strokeWidth={2.2} className="group-hover:rotate-3 transition-transform" />
 //     {count > 0 && (
@@ -473,9 +513,6 @@
 // );
 
 // export default Navbar;
-
-
-
 
 
 
@@ -518,6 +555,9 @@ const Navbar = () => {
 
   const navigate = useNavigate();
   const { scrollY } = useScroll();
+
+  // Calculate total notifications for mobile hamburger
+  const totalMobileNotifications = getCartCount() + getWishlistCount();
 
   // Fetch Categories
   useEffect(() => {
@@ -685,36 +725,23 @@ const Navbar = () => {
           {/* ACTION CLUSTER */}
           <div className="flex items-center gap-5 flex-1 justify-end">
             
-            {/* SEARCH TRIGGER (CMD+K) */}
-            {/* <motion.button 
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => setIsSearchOpen(true)}
-              className="hidden xl:flex items-center gap-4 bg-stone-100/50 border border-black/[0.06] hover:border-stone-900/20 hover:bg-stone-100 px-4 py-2.5 rounded-xl transition-all min-w-[200px]"
-            >
-              <Search size={16} className="text-stone-400" />
-              <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest flex-1 text-left">Search Vault...</span>
-              <div className="flex items-center gap-1 bg-white border border-black/10 px-1.5 py-0.5 rounded text-[9px] font-black text-stone-400 shadow-sm">
-                <Command size={10} /> K
-              </div>
-            </motion.button> */}
-
             {/* ICON TOOLS */}
             <div className="flex items-center gap-3">
-              {/* SYNCED SEARCH ICON - Works like the Collection search icon */}
               <NavToolIcon 
                 icon={Search} 
                 onClick={triggerGlobalSearch} 
-                className="hidden md:flex" // Always visible on mobile/desktop
+                className="hidden md:flex" 
               />
               <NavToolIcon 
                 icon={Heart} 
                 count={getWishlistCount()} 
+                className="hidden md:flex" 
                 onClick={() => user ? navigate('/wishlist') : setAuthModalOpen(true)} 
               />
               <NavToolIcon 
                 icon={ShoppingBag} 
                 count={getCartCount()} 
+                className="hidden md:flex" 
                 onClick={() => navigate('/cart')} 
               />
             </div>
@@ -793,14 +820,20 @@ const Navbar = () => {
               )}
             </div>
 
-            <button onClick={() => setVisible(true)} className="lg:hidden p-3 bg-stone-100 rounded-xl text-stone-950 border border-black/5">
+            <button onClick={() => setVisible(true)} className="lg:hidden p-3 bg-stone-100 rounded-xl text-stone-950 border border-black/5 relative transition-all active:scale-95">
               <Menu size={20} />
+              {/* Notification badge for mobile Hamburger */}
+              {totalMobileNotifications > 0 && (
+                <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-[10px] font-black text-white shadow-sm ring-2 ring-white">
+                  {totalMobileNotifications}
+                </span>
+              )}
             </button>
           </div>
         </div>
       </nav>
 
-      {/* FULL-SCREEN SEARCH OVERLAY (The "Command Palette") */}
+      {/* FULL-SCREEN SEARCH OVERLAY */}
       <AnimatePresence>
         {isSearchOpen && (
           <motion.div
@@ -838,7 +871,6 @@ const Navbar = () => {
 
               <div className="p-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {/* SEARCH SUGGESTIONS */}
                   <div>
                     <h5 className="text-[10px] font-black text-stone-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
                       <TrendingUp size={14} /> Popular Queries
@@ -857,7 +889,6 @@ const Navbar = () => {
                     </div>
                   </div>
 
-                  {/* QUICK LINKS */}
                   <div>
                     <h5 className="text-[10px] font-black text-stone-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
                       <Hash size={14} /> Top Categories
@@ -891,7 +922,7 @@ const Navbar = () => {
         )}
       </AnimatePresence>
 
-      {/* MOBILE INTERFACE */}
+      {/* MOBILE INTERFACE (SIDEBAR) */}
       <AnimatePresence>
         {visible && (
           <motion.div
@@ -909,6 +940,7 @@ const Navbar = () => {
                 <img src={assets.logo} alt="" className="w-28" />
                 <button onClick={() => setVisible(false)} className="p-3 bg-white shadow-md border border-black/5 rounded-full"><X size={20}/></button>
               </div>
+
               <div className="flex flex-col gap-2">
                 <MobileTermLink to="/" label="Home" onClick={() => setVisible(false)} />
                 <MobileTermLink to="/collection" label="Products" onClick={() => setVisible(false)} />
@@ -921,6 +953,26 @@ const Navbar = () => {
                   <span className="text-3xl font-black italic uppercase tracking-tighter text-stone-300 group-hover:text-stone-950 transition-all">Search</span>
                   <Search className="text-emerald-500" />
                 </button>
+              </div>
+
+              {/* MOBILE ACTION ROW */}
+              <div className='flex gap-4 mt-8'>
+                <NavToolIcon 
+                  icon={Heart} 
+                  count={getWishlistCount()} 
+                  onClick={() => {
+                    setVisible(false);
+                    user ? navigate('/wishlist') : setAuthModalOpen(true);
+                  }} 
+                />
+                <NavToolIcon 
+                  icon={ShoppingBag} 
+                  count={getCartCount()} 
+                  onClick={() => {
+                    setVisible(false);
+                    navigate('/cart');
+                  }} 
+                />
               </div>
 
               <div className="mt-auto p-8 bg-stone-950 rounded-[2.5rem] text-white overflow-hidden relative group">
