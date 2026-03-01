@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Prata&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-cream: #F7F5F2;
+  --color-stone-900: #1A1612;
+  --color-terracotta: #C45C3E;
+}
+
+* {
+  font-family: 'Outfit', system-ui, sans-serif;
+}
+
+body {
+  @apply bg-cream-100 text-stone-900 antialiased;
+}
+
+/* Glassy / modern look */
+.glass {
+  @apply bg-white/60 backdrop-blur-xl border border-white/40;
+}
+
+.glass-card {
+  @apply bg-white/70 backdrop-blur-md border border-cream-200/60 rounded-2xl shadow-lg;
+}
+
+.glass-card:hover {
+  @apply shadow-xl border-cream-300/60;
+}
+
+a.active hr {
+  display: block;
+}
+
+.prata-regular {
+  font-family: 'Prata', Georgia, serif;
+  font-weight: 400;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-cream-200;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-stone-400/40 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-stone-500/50;
+}
+
+@media (max-width: 640px) {
+  a.active {
+    @apply bg-stone-900 text-cream-100;
+  }
+}
+
+/* Toast overrides */
+.Toastify__toast {
+  @apply rounded-xl shadow-soft;
+}
